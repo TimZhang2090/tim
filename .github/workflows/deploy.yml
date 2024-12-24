@@ -31,6 +31,7 @@ jobs:
       # 安装依赖并构建
       - name: Install dependencies and build
         run: |
+          npm login
           npm install
           npm run build
 
