@@ -18,22 +18,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-
-      - name: Log in to npm
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          npm whoami
-
-      - name: Set npm registry
-        run: npm config set registry https://registry.npmjs.org/
+          node-version: 20
 
       # 安装依赖并构建
       - name: Install dependencies and build
         run: |
-          npm login
           npm install
           npm run build
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
