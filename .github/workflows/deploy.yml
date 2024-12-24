@@ -20,12 +20,10 @@ jobs:
         with:
           node-version: 22
 
-      - name: Check .npmrc contents
-        run: cat ~/.npmrc
-
-      # 配置 npm 认证
-      - name: Configure npm authentication
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Log in to npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm whoami
 
       # 安装依赖并构建
       - name: Install dependencies and build
